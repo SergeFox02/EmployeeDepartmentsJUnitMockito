@@ -17,28 +17,29 @@ public class EmployeeController {
 
     @GetMapping("/find")
     public String getPerson(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
-        if (employeeService.findEmployee(firstName, lastName)) {
-            return "Сотрудник найден!";
-        } else {
-            return "Сотрудник не найден!";
+        try {
+            employeeService.findEmployee(firstName, lastName);
+        } catch (NotFoundException exception) {
+            throw new NotFoundException();
         }
+        return String.valueOf(employeeService.findEmployee(firstName, lastName));
     }
 
     @GetMapping("/add")
     public String addEmployee(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
         if (employeeService.addEmployee(firstName, lastName)) {
-            return "Новый сотрудник добавлен!";
+            return "Сотрудник " + firstName + " " + lastName + " успешно создан.";
         } else {
-            return "Нет мест для нового сотрудника!";
+            throw new EmployeeArrayIsFull();
         }
     }
 
-    @GetMapping("/delete")
+    @GetMapping("/remove")
     public String removeEmployee(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
         if (employeeService.removeEmployee(firstName, lastName)) {
-            return "Сотрудник удален из списка!";
+            return "Сотрудник " + firstName + " " + lastName + " удален.";
         } else {
-            return "Такого сотрудника в списке нет!";
+            throw new NotFoundException();
         }
     }
 }

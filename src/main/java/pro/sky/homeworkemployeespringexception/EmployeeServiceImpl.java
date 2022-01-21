@@ -22,8 +22,7 @@ public class EmployeeServiceImpl implements EmployeeService{
                 return true;
             }
         }
-        System.out.println("Мы не можем принять нового сотрудника, у нас нет ваксансий.");
-        return false;
+        throw new EmployeeArrayIsFull();
     }
 
     @Override
@@ -34,17 +33,17 @@ public class EmployeeServiceImpl implements EmployeeService{
                 return true;
             }
         }
-        return false;
+        throw new NotFoundException();
     }
 
     @Override
-    public boolean findEmployee(String firstName, String lastName) {
+    public Employee findEmployee(String firstName, String lastName) {
         for (int i = 0; i < employees.length; i++) {
             if (employees[i] != null && employees[i].getFirstName().equals(firstName) &&
                     employees[i].getLastName().equals(lastName)) {
-                return true;
+                return employees[i];
             }
         }
-        return false;
+        throw new NotFoundException();
     }
 }
