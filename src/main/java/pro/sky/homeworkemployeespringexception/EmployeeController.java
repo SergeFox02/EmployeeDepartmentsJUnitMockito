@@ -16,30 +16,19 @@ public class EmployeeController {
     }
 
     @GetMapping("/find")
-    public String getPerson(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
-        try {
-            employeeService.findEmployee(firstName, lastName);
-        } catch (NotFoundException exception) {
-            throw new NotFoundException();
-        }
+    public String findEmployee(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
         return String.valueOf(employeeService.findEmployee(firstName, lastName));
     }
 
     @GetMapping("/add")
     public String addEmployee(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
-        if (employeeService.addEmployee(firstName, lastName)) {
-            return "Сотрудник " + firstName + " " + lastName + " успешно создан.";
-        } else {
-            throw new EmployeeArrayIsFull();
-        }
+        employeeService.addEmployee(firstName, lastName);
+        return "Сотрудник " + firstName + " " + lastName + " успешно создан.";
     }
 
     @GetMapping("/remove")
     public String removeEmployee(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
-        if (employeeService.removeEmployee(firstName, lastName)) {
-            return "Сотрудник " + firstName + " " + lastName + " удален.";
-        } else {
-            throw new NotFoundException();
-        }
+        employeeService.removeEmployee(firstName, lastName);
+        return "Сотрудник " + firstName + " " + lastName + " удален.";
     }
 }

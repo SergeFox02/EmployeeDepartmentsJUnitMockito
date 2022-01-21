@@ -15,22 +15,22 @@ public class EmployeeServiceImpl implements EmployeeService{
     };
 
     @Override
-    public boolean addEmployee(String firstName, String lastName) {
+    public void addEmployee(String firstName, String lastName) {
         for (int i = 0; i < this.employees.length; i++) {
             if (this.employees[i] == null) {
                 employees[i] = new Employee(firstName, lastName);
-                return true;
+                return;
             }
         }
-        throw new EmployeeArrayIsFull();
+        throw new EmployeeArrayFullException();
     }
 
     @Override
-    public boolean removeEmployee(String firstName, String lastName) {
+    public void removeEmployee(String firstName, String lastName) {
         for (int i = 0; i < this.employees.length; i++) {
             if (this.employees[i].getFirstName().equals(firstName) && this.employees[i].getLastName().equals(lastName)) {
                 this.employees[i] = null;
-                return true;
+                return;
             }
         }
         throw new NotFoundException();
