@@ -15,9 +15,14 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
+    @GetMapping
+    public String helloEmployee() {
+        return "Hello Employee!";
+    }
+
     @GetMapping("/find")
-    public String findEmployee(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
-        return String.valueOf(employeeService.findEmployee(firstName, lastName));
+    public Employee findEmployee(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
+        return employeeService.findEmployee(firstName, lastName);
     }
 
     @GetMapping("/add")

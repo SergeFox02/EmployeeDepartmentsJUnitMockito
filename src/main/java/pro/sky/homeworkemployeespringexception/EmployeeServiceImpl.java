@@ -22,7 +22,7 @@ public class EmployeeServiceImpl implements EmployeeService{
                 return;
             }
         }
-        throw new EmployeeArrayFullException();
+        throw new EmployeeArrayFullException("Массив полон, невозможно добавить новго работника!");
     }
 
     @Override
@@ -33,7 +33,7 @@ public class EmployeeServiceImpl implements EmployeeService{
                 return;
             }
         }
-        throw new NotFoundException();
+        throw new NotFoundException("Не возможно удалить работника.\nРаботник не найден!");
     }
 
     @Override
@@ -44,6 +44,6 @@ public class EmployeeServiceImpl implements EmployeeService{
                 return employees[i];
             }
         }
-        throw new NotFoundException();
+        throw new NotFoundException("Невозможно найти работнка. Его нет в спсике!");
     }
 }
