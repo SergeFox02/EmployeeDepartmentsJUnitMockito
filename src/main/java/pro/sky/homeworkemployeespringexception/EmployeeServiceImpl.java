@@ -33,11 +33,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     @Override
     public boolean findEmployee(String firstName, String lastName) {;
-        if (employees.contains(new Employee(firstName, lastName))) {
-            return true;
-        } else {
-            return false;
-        }
+        return employees.contains(new Employee(firstName, lastName));
     }
 
     @Override
