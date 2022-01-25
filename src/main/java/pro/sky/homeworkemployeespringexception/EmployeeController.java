@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Set;
+
 @RestController
 @RequestMapping("/employee")
 public class EmployeeController {
@@ -20,20 +22,23 @@ public class EmployeeController {
         return "Hello Employee!";
     }
 
-    @GetMapping("/find")
-    public Employee findEmployee(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
+    @GetMapping(path = "/find")
+    public boolean findEmployee(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
         return employeeService.findEmployee(firstName, lastName);
     }
 
-    @GetMapping("/add")
-    public String addEmployee(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
-        employeeService.addEmployee(firstName, lastName);
-        return "Сотрудник " + firstName + " " + lastName + " успешно создан.";
+    @GetMapping(path = "/add")
+    public boolean addEmployee(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
+        return employeeService.addEmployee(firstName, lastName);
     }
 
-    @GetMapping("/remove")
-    public String removeEmployee(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
-        employeeService.removeEmployee(firstName, lastName);
-        return "Сотрудник " + firstName + " " + lastName + " удален.";
+    @GetMapping(path = "/remove")
+    public boolean removeEmployee(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
+        return employeeService.removeEmployee(firstName, lastName);
+    }
+
+    @GetMapping(path = "/get")
+    public Set<Employee> getEmployeeList() {
+        return employeeService.getEmployee();
     }
 }

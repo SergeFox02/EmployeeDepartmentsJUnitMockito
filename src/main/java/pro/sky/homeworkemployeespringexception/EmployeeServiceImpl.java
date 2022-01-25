@@ -2,48 +2,46 @@ package pro.sky.homeworkemployeespringexception;
 
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Service
 public class EmployeeServiceImpl implements EmployeeService{
 
-    Employee[] employees = {
-            new Employee("Ivan1", "Ivanov1"),
-            new Employee("Ivan2", "Ivanov2"),
-            new Employee("Ivan3", "Ivanov3"),
-            new Employee("Ivan4", "Ivanov4"),
-            new Employee("Ivan5", "Ivanov5"),
-            new Employee("Ivan6", "Ivanov6")
-    };
+    Set<Employee> employees = new HashSet<>();
 
     @Override
-    public void addEmployee(String firstName, String lastName) {
-        for (int i = 0; i < this.employees.length; i++) {
-            if (this.employees[i] == null) {
-                employees[i] = new Employee(firstName, lastName);
-                return;
-            }
+    public boolean addEmployee(String firstName, String lastName) {
+        Employee addEmployee = new Employee(firstName, lastName);
+        if (!employees.contains(addEmployee)) {
+            employees.add(addEmployee);
+            return true;
         }
-        throw new EmployeeArrayFullException("Массив полон, невозможно добавить новго работника!");
+        return false;
     }
 
     @Override
-    public void removeEmployee(String firstName, String lastName) {
-        for (int i = 0; i < this.employees.length; i++) {
-            if (this.employees[i].getFirstName().equals(firstName) && this.employees[i].getLastName().equals(lastName)) {
-                this.employees[i] = null;
-                return;
-            }
+    public boolean removeEmployee(String firstName, String lastName) {
+        Employee removeEmployee = new Employee(firstName, lastName);
+        if (employees.contains(removeEmployee)) {
+            employees.remove(removeEmployee);
+            return true;
+        } else {
+            return false;
         }
-        throw new NotFoundException("Не возможно удалить работника.\nРаботник не найден!");
     }
 
     @Override
-    public Employee findEmployee(String firstName, String lastName) {
-        for (int i = 0; i < employees.length; i++) {
-            if (employees[i] != null && employees[i].getFirstName().equals(firstName) &&
-                    employees[i].getLastName().equals(lastName)) {
-                return employees[i];
-            }
+    public boolean findEmployee(String firstName, String lastName) {;
+        if (employees.contains(new Employee(firstName, lastName))) {
+            return true;
+        } else {
+            return false;
         }
-        throw new NotFoundException("Невозможно найти работнка. Его нет в спсике!");
+    }
+
+    @Override
+    public Set<Employee> getEmployee() {
+        return employees;
     }
 }
