@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Set;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/employee")
@@ -27,18 +27,18 @@ public class EmployeeController {
         return employeeService.findEmployee(firstName, lastName);
     }
 
-    @GetMapping(path = "/add")
+    @GetMapping(path = "/put")
     public boolean addEmployee(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
         return employeeService.addEmployee(firstName, lastName);
     }
 
     @GetMapping(path = "/remove")
-    public boolean removeEmployee(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
-        return employeeService.removeEmployee(firstName, lastName);
+    public boolean removeEmployee(@RequestParam("id") Integer id) {
+        return employeeService.removeEmployee(id);
     }
 
     @GetMapping(path = "/get")
-    public Set<Employee> getEmployeeList() {
+    public Map<Integer, Employee> getEmployeeList() {
         return employeeService.getEmployee();
     }
 }
