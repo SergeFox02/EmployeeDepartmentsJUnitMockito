@@ -10,31 +10,40 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     private Map<String, Employee> employees = new HashMap<>();
 
+    private String key(String firstName, String lastName) {
+        return firstName + lastName;
+    }
+
     @Override
-    public boolean addEmployee(String firstName, String lastName) {
+    public Employee addEmployee(String firstName, String lastName) {
         Employee addEmployee = new Employee(firstName, lastName);
-        String employee = firstName+lastName;
-        if (!employees.containsValue(addEmployee)) {
-            employees.put(employee, addEmployee);
-            return true;
+        String key = key(firstName, lastName);
+        if (!employees.containsKey(key)) {
+            employees.put(key, addEmployee);
+            return addEmployee;
         }
-        return false;
+        throw new NotFoundException("Не возможно добавить! Такой работник уже есть.");
     }
 
     @Override
-    public boolean removeEmployee(String firstName, String lastName) {
-        String employee = firstName + lastName;
-        if (employees.containsKey(employee)) {
-            employees.remove(employee);
-            return true;
+    public Employee removeEmployee(String firstName, String lastName) {
+        String key = key(firstName, lastName);
+        if (employees.containsKey(key)) {
+            employees.remove(key);
+            return new Employee(firstName, lastName);
         } else {
-            return false;
+            throw new NotFoundException("Не возможно удалить! Работник не найден.");
         }
     }
 
     @Override
-    public boolean findEmployee(String firstName, String lastName) {
-        return employees.containsValue(new Employee(firstName, lastName));
+    public Employee findEmployee(String firstName, String lastName) {
+        String key = key(firstName, lastName);
+        if (employees.containsKey(key)) {
+            return new Employee(firstName, lastName);
+        } else {
+            throw new NotFoundException("Работник не найден.");
+        }
     }
 
     @Override

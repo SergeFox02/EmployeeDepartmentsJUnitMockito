@@ -4,15 +4,10 @@ import java.util.Objects;
 
 public class Employee {
 
-    private final Integer id;
     private final String firstName;
     private final String lastName;
 
-    private static int counter = 0;
-
-
     public Employee(String firstName, String lastName) {
-        this.id = counter++;
         this.firstName = firstName;
         this.lastName = lastName;
     }
@@ -23,10 +18,6 @@ public class Employee {
 
     public String getLastName() {
         return lastName;
-    }
-
-    public Integer getId() {
-        return id;
     }
 
     @Override

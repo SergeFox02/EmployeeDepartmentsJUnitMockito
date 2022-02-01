@@ -23,17 +23,17 @@ public class EmployeeController {
     }
 
     @GetMapping(path = "/find")
-    public boolean findEmployee(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
+    public Employee findEmployee(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
         return employeeService.findEmployee(firstName, lastName);
     }
 
     @GetMapping(path = "/put")
-    public boolean addEmployee(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
+    public Employee addEmployee(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
         return employeeService.addEmployee(firstName, lastName);
     }
 
     @GetMapping(path = "/remove")
-    public boolean removeEmployee(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
+    public Employee removeEmployee(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
         return employeeService.removeEmployee(firstName, lastName);
     }
 
