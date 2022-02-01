@@ -33,12 +33,12 @@ public class EmployeeController {
     }
 
     @GetMapping(path = "/remove")
-    public boolean removeEmployee(@RequestParam("id") Integer id) {
-        return employeeService.removeEmployee(id);
+    public boolean removeEmployee(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
+        return employeeService.removeEmployee(firstName, lastName);
     }
 
     @GetMapping(path = "/get")
-    public Map<Integer, Employee> getEmployeeList() {
+    public Map<String, Employee> getEmployeeList() {
         return employeeService.getEmployee();
     }
 }

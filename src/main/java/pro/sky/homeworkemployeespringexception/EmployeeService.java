@@ -5,7 +5,7 @@ import java.util.Map;
 public interface EmployeeService {
 
     boolean addEmployee(String firstName, String lastName);
-    boolean removeEmployee(Integer id);
+    boolean removeEmployee(String firstName, String lastName);
     boolean findEmployee(String firstName, String lastName);
-    Map<Integer, Employee> getEmployee();
+    Map<String, Employee> getEmployee();
 }

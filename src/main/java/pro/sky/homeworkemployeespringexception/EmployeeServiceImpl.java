@@ -8,27 +8,24 @@ import java.util.Map;
 @Service
 public class EmployeeServiceImpl implements EmployeeService{
 
-    private Map<Integer, Employee> employees = new HashMap<>();
-    private Integer nextId = 0;
-
-    private Integer getNextId() {
-        return nextId++;
-    }
+    private Map<String, Employee> employees = new HashMap<>();
 
     @Override
     public boolean addEmployee(String firstName, String lastName) {
         Employee addEmployee = new Employee(firstName, lastName);
+        String employee = firstName+lastName;
         if (!employees.containsValue(addEmployee)) {
-            employees.put(getNextId(), addEmployee);
+            employees.put(employee, addEmployee);
             return true;
         }
         return false;
     }
 
     @Override
-    public boolean removeEmployee(Integer id) {
-        if (employees.containsKey(id)) {
-            employees.remove(id);
+    public boolean removeEmployee(String firstName, String lastName) {
+        String employee = firstName + lastName;
+        if (employees.containsKey(employee)) {
+            employees.remove(employee);
             return true;
         } else {
             return false;
@@ -41,7 +38,7 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     @Override
-    public Map<Integer, Employee> getEmployee() {
+    public Map<String, Employee> getEmployee() {
         return employees;
     }
 }
