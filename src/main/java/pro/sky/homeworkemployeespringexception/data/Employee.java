@@ -1,5 +1,8 @@
 package pro.sky.homeworkemployeespringexception.data;
 
+import org.apache.commons.lang3.StringUtils;
+import pro.sky.homeworkemployeespringexception.exception.BadRequest;
+
 import java.util.Objects;
 
 public class Employee {
@@ -10,15 +13,10 @@ public class Employee {
     private double salary;
 
     public Employee(String firstName, String lastName, int department, double salary) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.firstName = checkName(firstName);
+        this.lastName = checkName(lastName);
         this.department = department;
         this.salary = salary;
-    }
-
-    public Employee(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
     }
 
     public String getFirstName() {
@@ -43,6 +41,13 @@ public class Employee {
 
     public void setSalary(double salary) {
         this.salary = salary;
+    }
+
+    private String checkName(String name) {
+        if (StringUtils.containsNone(name, "1234567890+-*/!@#$%^&()=_`~\"№;:?,.")){
+            return StringUtils.capitalize(name);
+        }
+        throw new BadRequest("Exception name of employee");
     }
 
     @Override
