@@ -1,7 +1,7 @@
 package pro.sky.homeworkemployeespringexception.data;
 
 import org.apache.commons.lang3.StringUtils;
-import pro.sky.homeworkemployeespringexception.exception.BadRequestException;
+import pro.sky.homeworkemployeespringexception.exception.InvalidNameException;
 
 import java.util.Objects;
 
@@ -44,10 +44,10 @@ public class Employee {
     }
 
     private String checkName(String name) {
-        if (StringUtils.containsNone(name, "1234567890+-*/!@#$%^&()=_`~\"№;:?,.")){
-            return StringUtils.capitalize(name);
+        if (StringUtils.isAlpha(name)){
+            return StringUtils.capitalize(StringUtils.lowerCase(name));
         }
-        throw new BadRequestException("Exception name of employee");
+        throw new InvalidNameException("Exception: Invalid name of employee");
     }
 
     @Override
