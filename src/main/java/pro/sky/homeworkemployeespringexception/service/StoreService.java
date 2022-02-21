@@ -5,5 +5,5 @@ import java.util.List;
 public interface StoreService {
 
     List<String> addProduct(List<Integer> idItems);
-    List<String> getShoppingCart();
+    List<String> getCart();
 }

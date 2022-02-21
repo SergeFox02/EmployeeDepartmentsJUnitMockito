@@ -1,6 +1,5 @@
 package pro.sky.homeworkemployeespringexception.controller;
 
-import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,6 +33,6 @@ public class StoreController {
 
     @GetMapping(path = "/get")
     public List<String> getProductsInStoreCart() {
-        return storeService.getShoppingCart();
+        return storeService.getCart();
     }
 }

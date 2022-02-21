@@ -9,20 +9,20 @@ import java.util.List;
 
 @Component
 @SessionScope
-public class ShoppingCart {
+public class Cart {
 
     private List<String> shoppingCart;
     private final Products products = new Products();
 
-    public ShoppingCart() {
+    public Cart() {
         this.shoppingCart = new ArrayList<>();
     }
 
-    public List<String> getShoppingCart() {
+    public List<String> getItems() {
         return shoppingCart;
     }
 
-    public List<String> addProductToShoppingCart(List<Integer> idItems) {
+    public List<String> addItems(List<Integer> idItems) {
         for (Integer idItem : idItems) {
             shoppingCart.add(products.getProduct(idItem));
         }
