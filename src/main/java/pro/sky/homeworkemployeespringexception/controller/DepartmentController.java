@@ -40,7 +40,7 @@ public class DepartmentController {
 
     @GetMapping("/all")
     public Map<Integer, List<Employee>> findAllEmployeesByDepartmentId() {
-        return departmentService.findAllEmployeesByDepartmentId();
+        return departmentService.findAllEmployees();
     }
 
     @GetMapping(path = "/total-salary")

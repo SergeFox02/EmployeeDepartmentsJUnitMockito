@@ -12,7 +12,7 @@ public interface DepartmentService {
     Employee findEmployeeWithMaxSalaryByDepartmentId(int department);
     Employee findEmployeeWithMinSalaryByDepartmentId(int department);
     Collection<Employee> findEmployeesByDepartmentId(int department);
-    Map<Integer, List<Employee>> findAllEmployeesByDepartmentId();
+    Map<Integer, List<Employee>> findAllEmployees();
     double findTotalSalaryOfDepartment(int department);
     OptionalDouble findMediumSalaryOfDepartment(int department);
 
