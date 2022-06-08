@@ -57,6 +57,7 @@ public class DepartmentServiceImpl implements DepartmentService{
     @Override
     public OptionalDouble findMediumSalaryOfDepartment(int department) {
         return employeeService.getAllEmployees().stream()
+                .filter(e -> e.getDepartment() == department)
                 .map(Employee::getSalary)
                 .mapToDouble(s -> s)
                 .average();
